@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DSS MAIN</title>
+        <link rel="stylesheet" href="/static/CSS/style.css">
+        
+    </head>
+    <body>
+        <h1 id="main-header">SCDS MAIN</h1>
+        <ul id="category-toggle-list">
+            <li class="project-category web active"><a>SCDS</a></li>
+            <li class="project-category scannin"><a onclick="redirectToPage()">SCANNING</a></li>
+            <li class="project-category cro"><a onclick="redirectToRecords()">View Records</a></li>
+            
+            
+        </ul>
+    </body>
+
+    <script>
+          function redirectToPage() {
+    // Specify the URL of the desired page
+    var pageUrl = "/scanning";
+
+    // Redirect to the specified page
+    window.location.href = pageUrl;
+  }
+
+  function redirectToRecords() {
+    // Specify the URL of the desired page
+    var pageUrl = "/list";
+
+    // Redirect to the specified page
+    window.location.href = pageUrl;
+  }
+
+
+
+    </script>
+</html>

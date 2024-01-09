@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Image List</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        async function openPieChart(imageId) {
+            // Fetch chart data from Flask endpoint
+            _id = imageId;
+            url = `/retrieve?_id=${encodeURIComponent(_id)}`;
+            console.log(url)
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                //console.log(data['label'])
+                // Create a new window to display the pie chart
+                var screenWidth = window.screen.width;
+var screenHeight = window.screen.height;
+var windowWidth = 1000;
+var windowHeight = 1000;
+
+var left = (screenWidth - windowWidth) / 2;
+var top = (screenHeight - windowHeight) / 2;
+                var chartWindow = window.open('', '_blank', 'width=' + windowWidth + ', height=' + windowHeight + ', left=' + left);
+
+                // Create a canvas element in the new window
+                var canvas = chartWindow.document.createElement('canvas');
+                chartWindow.document.body.appendChild(canvas);
+
+                // Render pie chart in the new window using Chart.js
+                var ctx = canvas.getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: data['label'],
+                        datasets: [{
+                            data: data['value'],
+                            backgroundColor: data['color']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            } catch (error) {
+                console.error('Error retrieving information:', error);
+            }
+        }
+
+        function redirectToHome() {
+    // Specify the URL of the desired page
+    var pageUrl = "/";
+
+    // Redirect to the specified page
+    window.location.href = pageUrl;
+  }
+    </script>
+    <style>
+        body{
+            background: #2c3e50;
+        }
+
+        .image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 10px;
+  justify-content: center;
+}
+
+.grid-item {
+  overflow: hidden;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.title{
+    font-size: 60px;
+    color: #fff;
+    text-align: center;
+    
+}
+.back-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  text-decoration: none;
+  padding: 10px;
+  background-color: #333; /* Change the color as per your preference */
+  color: #fff; /* Change the color as per your preference */
+  
+}
+    </style>
+</head>
+<body>
+    <h1 class="title">LIST OF IMAGES</h1>
+    <button class="back-button" onclick="redirectToHome()">Back</button>
+    <div class="image-grid">
+        {% for record in result %}
+        <div class="grid-item">
+            <img src="static/{{ record['img_path'] }}.JPEG" alt="Image" width="500" height="400"
+            onclick="openPieChart('{{record['_id']}}')">
+        </div>
+            
+        {% endfor %}
+    </div>
+</body>
+</html>

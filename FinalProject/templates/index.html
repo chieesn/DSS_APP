@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Upload</title>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            background: #2c3e50;
+        }
+
+        input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #000;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+  color: #fff;
+}
+
+
+h1{
+  font-size: 60px;
+  color: #fff;
+}
+
+        button {
+            padding: 10px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #preview {
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #typeOfCancer {
+            font-size: 40px;
+            color: #fff;
+            text-transform: capitalize;
+        }
+
+        .back-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  text-decoration: none;
+  padding: 10px;
+  background-color: #333; /* Change the color as per your preference */
+  color: #fff; /* Change the color as per your preference */
+  border-radius: 5px;
+}
+
+</style>
+</head>
+<body>
+  <h1 id="title">DSS FINAL</h1>
+  <button class="back-button" onclick="redirectToHome()">Back</button>
+  <input type="file" id="imageInput">
+  <button onclick="uploadImage()">Upload Image</button>
+  <div class="container">
+    <div id="preview"></div>
+    <div id="typeOfCancer"></div>
+  </div>
+
+  
+
+  <script>
+
+function redirectToHome() {
+    // Specify the URL of the desired page
+    var pageUrl = "/";
+
+    // Redirect to the specified page
+    window.location.href = pageUrl;
+  }
+
+    async function uploadImage() {
+      
+
+      var input = document.getElementById('imageInput');
+      var preview = document.getElementById('preview');
+      
+      var file = input.files[0];
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      if (file) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var imageUrl = e.target.result;
+            preview.innerHTML = '<img src="' + imageUrl + '" alt="Uploaded Image" />';
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        alert('Please select an image before uploading.');
+    }
+    
+      try {
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
+        var dict = {
+          "akiec":"actinic keratoses and intraepithelial carcinoma/Bowen disease",
+          "bcc" : "Basal cell carcinoma",
+          "bkl" : "benign lesions of the keratosis type",
+          "df" : "dermatofibroma",
+          "mel" : "melanoma",
+          "nv" : "melanocytic nevi",
+          "vasc" : "vascular lesions"
+        }
+        console.log(data); // Response from the server after uploading the image
+        typeOfCancer.innerHTML = "Type Of Cancer: " + dict[data["typeOfCancer"]];
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
+
+
+    }
+  </script>
+</body>
+</html>

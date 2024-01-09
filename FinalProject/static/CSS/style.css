@@ -1,0 +1,216 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+  background: #456;
+  font-family: 'Open Sans', sans-serif;
+}
+/* ---------------------------------------------------------------------- */
+.login {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #28d;
+}
+
+.login-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+  padding: 12px;
+}
+
+.login input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.login input[type="id"],
+.login input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.login input[type="id"]:focus,
+.login input[type="password"]:focus {
+  border-color: #888;
+}
+
+.login input[type="submit"] {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.login input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+/* ---------------------------------------------------------------------- */
+#main-header{
+  color: #fff;
+  font-size: 3vw;
+  font-family:sans-serif;
+}
+
+body {
+	background:#456;
+	margin:0;
+	padding:40px;
+}
+
+#category-toggle-list {
+	padding:0;
+	margin:0;
+	max-width:200px
+}
+
+#category-toggle-list li {
+	list-style:none;
+	color:#fff;
+	font-family:sans-serif;
+	text-transform:uppercase;
+	padding:15px 0;
+	position:relative;
+	margin-bottom:10px;
+	opacity:0.3;
+	cursor:pointer;
+	font-weight:700;
+	letter-spacing:2px;
+	font-size:13px;
+	line-height:1.3em;
+	text-align:right;
+	transition:all ease 0.2s;
+}
+
+#category-toggle-list li:hover {
+	opacity:0.8;
+}
+
+#category-toggle-list a {
+	text-decoration:none;
+	color:#fff;
+}
+
+#category-toggle-list li a:after {
+	content: " ";
+	background: #fff;
+	width: 0%;
+	height: 2px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	transition:all ease 0.4s;
+}
+
+#category-toggle-list li:hover a:after {
+	width:100%;
+	width:25%;
+}
+
+#category-toggle-list li.active {
+	opacity:1;
+}
+
+#category-toggle-list li.active a:after {
+	content: " ";
+	background: #fff;
+	width: 100%;
+	height: 2px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+/* ---------------------------------------------------------------------- */
+body {
+  background: #2c3e50;
+  color: white;
+  font-family: monospace;
+}
+input, .modal {
+  color: black;
+}
+.table-striped > tbody > tr:nth-child(2n + 1) > td,
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: #34495e;
+}
+.row .alert {
+  margin-top: 25px;
+}
+th, td {
+  border-top: none !important;
+}
+
+h3 {
+  background-color: #333;
+  padding: 12px;
+  border-top-right-radius: 20px;
+  font-weight: bolder;
+  letter-spacing: .1em;
+}
+
+.modal-content{
+  border-radius: 0;
+}
+
+.modal-header, .modal-footer {
+  background-color: #333;
+  color: white;
+  border: 0;
+}
+
+.modal-body {
+  background: #2c3e50;
+  color: white;
+}
+
+.close, .close:hover {
+  color: white;
+}
+
+.btn {
+  font-weight: bolder;
+  letter-spacing: .2em;
+}
